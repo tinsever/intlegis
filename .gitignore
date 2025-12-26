@@ -1,0 +1,27 @@
+# Configuration and Secrets
+config.php
+
+# Local Databases
+data.sqlite
+data.sqlite-journal
+data.sqlite-shm
+data.sqlite-wal
+
+# Storage and Caches
+/storage/framework/views/*
+!/storage/framework/views/.gitkeep
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+__MACOSX/
+
+# IDEs
+.vscode/
+.idea/
+.cursor/
+
+# Dependencies (if any)
+vendor/
+node_modules/
+

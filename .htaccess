@@ -1,0 +1,14 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Redirect to /public/ if accessing directly
+    # (Optional, but index.php in root handles this too)
+    
+    # If the requested filename exists, use it
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    
+    # Otherwise, send it to index.php
+    RewriteRule ^ index.php [L]
+</IfModule>
+
