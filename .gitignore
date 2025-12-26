@@ -22,6 +22,6 @@ __MACOSX/
 .cursor/
 
 # Dependencies (if any)
-vendor/
-node_modules/
+/vendor/
+/node_modules/
 
