@@ -10,13 +10,20 @@ function handleSyncExport(): void {
     $lastId = (int)($_GET['last_id'] ?? 0);
     $db = db();
 
-    // Fetch new audit logs
-    $stmt = $db->prepare('SELECT * FROM audit_logs WHERE id > ? ORDER BY id ASC LIMIT 100');
+    // Fetch new audit logs - Filter out local laws and other non-syncable entities
+    $stmt = $db->prepare('SELECT * FROM audit_logs WHERE id > ? AND entity_type IN ("treaty", "country") ORDER BY id ASC LIMIT 100');
     $stmt->execute([$lastId]);
     $logs = $stmt->fetchAll();
 
+    // Determine the highest log ID processed (even if not returned) to allow jumping gaps
+    $maxProcessedId = $lastId;
+    $maxIdStmt = $db->prepare('SELECT MAX(id) FROM (SELECT id FROM audit_logs WHERE id > ? ORDER BY id ASC LIMIT 100) as sub');
+    $maxIdStmt->execute([$lastId]);
+    $maxProcessedId = (int)($maxIdStmt->fetchColumn() ?: $lastId);
+
     $response = [
         'logs' => $logs,
+        'max_id' => $maxProcessedId,
         'versions' => [],
         'entities' => [
             'treaties' => [],
@@ -83,11 +90,11 @@ function pullUpdates(): array {
     }
 
     $data = json_decode((string)$response, true);
-    if (!$data || !isset($data['logs'])) {
+    if (!$data || !isset($data['logs']) || !isset($data['max_id'])) {
         return ['status' => 'error', 'message' => 'Ungültige Antwort von der Primärinstanz'];
     }
 
-    if (empty($data['logs'])) {
+    if (empty($data['logs']) && $data['max_id'] <= $lastLogId) {
         return ['status' => 'success', 'count' => 0, 'message' => 'Bereits aktuell'];
     }
 
@@ -150,7 +157,7 @@ function pullUpdates(): array {
         }
 
         // 6. Update Sync State
-        $newLastId = (int)end($data['logs'])['id'];
+        $newLastId = (int)$data['max_id'];
         $db->prepare('INSERT INTO sync_state (last_log_id) VALUES (?)')->execute([$newLastId]);
 
         $db->commit();
