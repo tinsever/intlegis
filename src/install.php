@@ -8,8 +8,16 @@ function renderInstall(string $view, array $vars = []): void {
     // Define a local url helper for the installer views
     if (!function_exists('url')) {
         function url(string $path): string {
-            global $basePath;
-            return ($basePath ?? '') . '/' . ltrim($path, '/');
+            $scriptName = $_SERVER['SCRIPT_NAME']; // e.g. /intlegis/index.php
+            $basePath = str_replace('/public/index.php', '', $scriptName);
+            $basePath = str_replace('/index.php', '', $basePath);
+            return $basePath . '/' . ltrim($path, '/');
+        }
+    }
+
+    if (!function_exists('config')) {
+        function config(string $key, $default = null) {
+            return $default;
         }
     }
 

@@ -4,6 +4,9 @@
     # Redirect to /public/ if accessing directly
     # (Optional, but index.php in root handles this too)
     
+    # Transparently serve assets from the public folder
+    RewriteRule ^assets/(.*)$ public/assets/$1 [L]
+
     # If the requested filename exists, use it
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
