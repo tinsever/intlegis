@@ -26,7 +26,3 @@ Detailed documentation is available in the `documentation/` folder:
 *   **Backend**: PHP 8.1+ (Native, no heavy frameworks)
 *   **Frontend**: HTMX, Alpine.js, Tailwind CSS
 *   **Database**: SQLite or MySQL
-
----
-
-*IntLegis - Centralizing legal information across borders.*
