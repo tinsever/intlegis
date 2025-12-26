@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= htmlspecialchars(config('app.name', 'IntLegis')) ?> Setup - <?= htmlspecialchars($title ?? 'Installation') ?></title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="<?= url('/assets/vendor/js/tailwind.min.js') ?>"></script>
     <style type="text/tailwindcss">
         @layer components {
             .btn {

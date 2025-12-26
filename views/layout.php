@@ -7,9 +7,12 @@
     <title><?= htmlspecialchars($title ?? config('app.name', 'IntLegis'), ENT_QUOTES) ?> | <?= htmlspecialchars(config('app.name', 'IntLegis'), ENT_QUOTES) ?></title>
     
     <!-- Tailwind CSS with Typography Plugin -->
-    <script src="https://cdn.tailwindcss.com?plugins=typography,forms"></script>
+    <script src="<?= url('/assets/vendor/js/tailwind.min.js') ?>"></script>
     <script>
         tailwind.config = {
+            // Include typography and forms plugin configuration if needed
+            // The Play CDN usually has them built-in, but we can't pass them via URL anymore.
+            // However, the bundle from cdn.tailwindcss.com usually includes them.
             theme: {
                 extend: {
                     fontFamily: {
@@ -34,9 +37,9 @@
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
     
     <!-- HTMX & Alpine -->
-    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.8/dist/htmx.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="<?= url('/assets/vendor/js/htmx.min.js') ?>"></script>
+    <script defer src="<?= url('/assets/vendor/js/alpine-focus.min.js') ?>"></script>
+    <script defer src="<?= url('/assets/vendor/js/alpine.min.js') ?>"></script>
     
     <script>
         // Theme Management
@@ -92,8 +95,8 @@
     </script>
     
     <!-- Quill Editor -->
-    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+    <link href="<?= url('/assets/vendor/css/quill.snow.css') ?>" rel="stylesheet">
+    <script src="<?= url('/assets/vendor/js/quill.js') ?>"></script>
 
     <style>
         :root {

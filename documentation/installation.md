@@ -5,8 +5,9 @@ IntLegis is designed to be easy to install, even on shared hosting environments.
 ## Requirements
 
 *   PHP 8.1 or higher.
-*   Extensions: `pdo_sqlite` or `pdo_mysql`, `mbstring`, `json`.
+*   Extensions: `pdo_sqlite` or `pdo_mysql`, `mbstring`, `json`, `curl` (for replication).
 *   Writable root directory (for `config.php` and `data.sqlite` creation).
+*   **Domain Root**: IntLegis must be installed in the root directory of a domain or subdomain (e.g., `https://treaties.example.com/`). Installing in a subdirectory (e.g., `https://example.com/treaties/`) is not supported.
 
 ## Quick Setup (Wizard)
 

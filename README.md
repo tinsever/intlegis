@@ -12,6 +12,14 @@ Detailed documentation is available in the `documentation/` folder:
 *   **[Authentication System](documentation/authentication.md)** - Pluggable auth and custom providers.
 *   **[Laws & Treaties](documentation/laws_and_treaties.md)** - Managing documents and relationships.
 
+## 🚀 Quick Start
+
+*   **Requirements**: PHP 8.1+, PDO (SQLite/MySQL), cURL.
+*   **Domain Root**: IntLegis must be installed in the root of a domain or subdomain (e.g., `treaties.example.com`).
+*   **Permissions**: Ensure the root directory is writable for the installer.
+
+Detailed instructions can be found in the **[Installation Guide](documentation/installation.md)**.
+
 ## 🚀 Key Features
 
 *   **Distributed Sync**: Run mirror instances that automatically pull updates for international law (Treaties & Countries).
